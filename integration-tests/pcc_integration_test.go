@@ -53,6 +53,9 @@ func TestCreatePcc(t *testing.T) {
 func TestListPcc(t *testing.T) {
 	c := setupTestEnv()
 
+	c.CoreSdk.GetConfig().Host = "http://localhost:8080"
+	c.CoreSdk.GetConfig().Debug = true
+
 	pccs, err := c.ListPrivateCrossConnects()
 	if err != nil {
 		t.Fatal(err)
