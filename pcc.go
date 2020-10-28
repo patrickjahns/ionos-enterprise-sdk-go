@@ -165,7 +165,7 @@ func (c *Client) UpdatePrivateCrossConnect(pccID string, pcc PrivateCrossConnect
 	}
     ctx, cancel := c.GetContext()
     if cancel != nil { defer cancel() }
-	rsp, apiResponse, err := c.CoreSdk.PrivateCrossConnectApi.PccsPatch(ctx, pccID).Pcc(input.Properties).Execute()
+	rsp, apiResponse, err := c.CoreSdk.PrivateCrossConnectApi.PccsPatch(ctx, pccID).Pcc(*input.Properties).Execute()
 	ret := PrivateCrossConnect{}
 	if errConvert := convertToCompat(&rsp, &ret); errConvert != nil {
 		return nil, errConvert
