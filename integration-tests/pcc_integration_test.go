@@ -53,9 +53,6 @@ func TestCreatePcc(t *testing.T) {
 func TestListPcc(t *testing.T) {
 	c := setupTestEnv()
 
-	c.CoreSdk.GetConfig().Host = "http://localhost:8080"
-	c.CoreSdk.GetConfig().Debug = true
-
 	pccs, err := c.ListPrivateCrossConnects()
 	if err != nil {
 		t.Fatal(err)
@@ -68,6 +65,9 @@ func TestListPcc(t *testing.T) {
 func TestGetPcc(t *testing.T) {
 	c := setupTestEnv()
 
+	if pcc == nil {
+		t.Fatal("PCC was not created")
+	}
 	p, err := c.GetPrivateCrossConnect(pcc.ID)
 	if err != nil {
 		t.Fatal(err)
@@ -78,6 +78,9 @@ func TestGetPcc(t *testing.T) {
 
 func TestUpdatePcc(t *testing.T) {
 	c := setupTestEnv()
+	if pcc == nil {
+		t.Fatal("PCC was not created")
+	}
 	p, err := c.UpdatePrivateCrossConnect(pcc.ID, *pcc)
 	if err != nil {
 		t.Fatal(err)
@@ -89,6 +92,9 @@ func TestUpdatePcc(t *testing.T) {
 
 func TestDeletePcc(t *testing.T) {
 	c := setupTestEnv()
+	if pcc == nil {
+		t.Fatal("PCC was not created")
+	}
 	_, err := c.DeletePrivateCrossConnect(pcc.ID)
 	if err != nil {
 		t.Fatal(err)
